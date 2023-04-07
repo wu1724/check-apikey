@@ -114,12 +114,13 @@
 			<thead>
 				<tr>
 					<th>API KEY</th>
-					<th style="width: 350px">用户ID</th>
-					<th style="width: 50px">总额度</th>
-					<th style="width: 185px">已使用</th>
-					<th style="width: 90px">剩余额度</th>
-					<th style="width: 90px">有效期起</th>
-					<th style="width: 90px">有效期至</th>
+					<!-- <th style="width: 350px">用户ID</th> -->
+					<th style="width: 100px">总额度</th>
+					<th style="width: 100px">已使用</th>
+					<th style="width: 100px">剩余额度</th>
+					<th style="width: 200px">到期时间</th>
+					<!-- <th style="width: 90px">有效期起</th> -->
+					<!-- <th style="width: 90px">有效期至</th> -->
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -192,10 +193,10 @@
 								row.appendChild(errorMessageCell);
 							} else {
 								// ID
-								let IDCell = document.createElement("td");
+								// let IDCell = document.createElement("td");
 								// IDCell.textContent = data.grants.data[0].id;
-								IDCell.textContent = "";
-								row.appendChild(IDCell);
+								// IDCell.textContent = "";
+								// row.appendChild(IDCell);
 
 								// TOTAL GRANTED
 								let totalGrantedCell = document.createElement("td");
@@ -216,19 +217,19 @@
 								row.appendChild(totalAvailableCell);
 
 								// EFFECTIVE FROM
-								let effectiveFromCell = document.createElement("td");
+								// let effectiveFromCell = document.createElement("td");
 								// effectiveFromCell.textContent = new Date(
 								// 	data.grants.data[0].effective_at * 1000
 								// ).toLocaleDateString();
-								effectiveFromCell.textContent = "";
-								row.appendChild(effectiveFromCell);
+								// effectiveFromCell.textContent = "";
+								// row.appendChild(effectiveFromCell);
 
 								// EXPIRES AT
 								let expiresAtCell = document.createElement("td");
 								// expiresAtCell.textContent = new Date(
 								// 	data.grants.data[0].expires_at * 1000
 								// ).toLocaleDateString();
-								expiresAtCell.textContent = "";
+								expiresAtCell.textContent = data[3];
 								row.appendChild(expiresAtCell);
 							}
 
@@ -351,12 +352,12 @@
 					console.log(`Total Amount: ${totalAmount.toFixed(2)}`);
 					console.log(`Used: ${totalUsage.toFixed(2)}`);
 					console.log(`Remaining: ${remaining.toFixed(2)}`);
-			
-					return [totalAmount, totalUsage, remaining];
+					let expiration_time = formatDate(new Date(timestamp_expire * 1000))
+					return [totalAmount.toFixed(2), totalUsage.toFixed(2), remaining.toFixed(2), expiration_time];
 				} catch (error) {
 					console.error(error);
 					alert("您的IP无法访问OpenAI，请在OpenAI服务范围内查询。");
-					return [null, null, null];
+					return [null, null, null,null];
 				}
 			}
 
